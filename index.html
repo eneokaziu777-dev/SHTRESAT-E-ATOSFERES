@@ -1,0 +1,188 @@
+<!DOCTYPE html><html lang="sq"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><title>Earth’s Atmosphere – Shtresat e atmosferës</title>
+<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{color-scheme:dark;--ink:#e6f1ff;--mut:#8fa6c9;--cy:#35e0ff;--vi:#9a6bff;--or:#ff9a3c;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;background:#02040c;color:var(--ink);font:400 16px/1.55 "Chakra Petch",system-ui,sans-serif}
+button{font:inherit;color:inherit;cursor:pointer}
+.hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:24px;background:radial-gradient(ellipse at 50% 120%,#1a3b8a 0,#070d24 45%,#02040c 75%)}
+.hero h1{font-size:clamp(2.4rem,8vw,6rem);margin:0;letter-spacing:.02em;line-height:1.02;background:linear-gradient(90deg,var(--cy),var(--vi) 60%,var(--or));-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero p{max-width:34em;color:var(--mut);font-size:1.15rem}
+.big{margin-top:18px;padding:16px 38px;border-radius:40px;border:1px solid var(--cy);background:rgba(53,224,255,.12);font-weight:700;letter-spacing:.12em;box-shadow:0 0 30px rgba(53,224,255,.3);transition:.2s}
+.big:hover{background:var(--cy);color:#02040c}
+#lab{position:relative;height:100vh;min-height:620px;overflow:hidden;background:radial-gradient(ellipse at 50% 50%,#07123a,#02040c 70%)}
+#cv{position:absolute;inset:0;width:100%;height:100%;touch-action:none;cursor:grab}
+.gl{background:rgba(14,26,52,.6);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid rgba(120,170,255,.25);border-radius:14px}
+#bar{position:absolute;top:12px;left:50%;transform:translateX(-50%);display:flex;gap:6px;flex-wrap:wrap;justify-content:center;padding:8px;width:max-content;max-width:calc(100% - 90px)}
+#bar button,.sm{background:rgba(53,224,255,.1);border:1px solid rgba(53,224,255,.4);border-radius:9px;padding:6px 11px;font-size:.78rem;font-weight:600}
+#bar button:hover,.sm:hover,#bar button.on{background:var(--cy);color:#02040c}
+#scale{position:absolute;left:8px;top:84px;bottom:70px;width:92px}
+#scale i{position:absolute;left:12px;top:8px;bottom:8px;width:2px;background:linear-gradient(var(--cy),var(--vi),var(--or))}
+#scale button{position:absolute;left:0;transform:translateY(50%);background:none;border:0;font-size:.68rem;text-align:left;padding:0 0 0 22px;color:var(--ink);line-height:1.1}
+#scale button:before{content:"";position:absolute;left:8px;top:50%;width:10px;height:2px;background:var(--cy)}
+#scale button span{display:block;color:var(--mut);font-size:.62rem}
+.lb{position:absolute;left:0;top:0;font-size:.74rem;font-weight:600;pointer-events:none;white-space:nowrap;text-shadow:0 0 6px #000,0 0 3px #000;padding-left:8px;border-left:2px solid currentColor}
+.lb small{display:block;color:var(--mut);font-weight:400}
+#panel{position:absolute;right:12px;top:12px;bottom:12px;width:min(380px,92vw);padding:20px;overflow-y:auto;transform:translateX(115%);transition:transform .45s cubic-bezier(.2,.8,.2,1)}
+#panel.open{transform:none}
+#panel h2{margin:0;font-size:1.9rem}#panel .en{color:var(--mut);margin:0 0 10px;font-size:.85rem}
+#panel h4{margin:14px 0 4px;color:var(--cy);font-size:.95rem}#panel p,#panel li{font-size:.9rem;margin:0 0 4px}#panel ul{padding-left:18px;margin:0}
+.x{position:absolute;right:12px;top:10px;background:none;border:0;font-size:1.6rem}
+#toast{position:absolute;left:50%;bottom:16px;transform:translateX(-50%);width:min(520px,calc(100% - 130px));padding:14px 18px;display:none}
+#toast h3{margin:0 0 4px;color:var(--or)}#toast p{margin:0 0 8px;font-size:.9rem}
+#hint{position:absolute;left:112px;bottom:16px;color:var(--mut);font-size:.75rem;pointer-events:none}
+section.q,section.end{max-width:760px;margin:0 auto;padding:80px 20px}
+.q h2,.end h2{font-size:clamp(1.6rem,4vw,2.5rem);margin:0 0 20px}
+#qb{padding:22px}
+.pg{height:6px;background:#12204a;border-radius:4px;overflow:hidden;margin-bottom:14px}.pg b{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--cy),var(--vi));transition:width .4s}
+.op{display:block;width:100%;text-align:left;margin:8px 0;padding:11px 14px;border-radius:10px;background:rgba(255,255,255,.04);border:1px solid rgba(120,170,255,.3)}
+.op:hover:not(:disabled){border-color:var(--cy)}.op.ok{background:rgba(40,200,120,.25);border-color:#2ec880}.op.no{background:rgba(255,80,80,.22);border-color:#ff5656}
+#ex2{margin-top:10px;color:var(--mut)}
+.earth{width:min(300px,70vw);aspect-ratio:1;border-radius:50%;margin:0 auto 26px;background:radial-gradient(circle at 35% 30%,#4aa3ff,#0b3d7a 55%,#031230);box-shadow:0 0 0 10px rgba(58,160,255,.18),0 0 0 26px rgba(154,107,255,.12),0 0 0 44px rgba(53,224,255,.07),0 0 90px rgba(53,224,255,.35)}
+.end p{color:var(--mut)}footer{text-align:center;padding:30px;color:var(--mut);border-top:1px solid #12204a}
+@media(max-width:700px){#panel{top:auto;left:8px;right:8px;width:auto;height:52%;transform:translateY(115%)}#panel.open{transform:none}#scale{width:70px}#scale button span{display:none}#hint{display:none}#toast{width:calc(100% - 100px)}.lb{font-size:.64rem}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+button:focus-visible{outline:2px solid var(--or);outline-offset:2px}
+</style></head><body>
+<header class="hero"><h1>EARTH’S ATMOSPHERE</h1><p><em>Explore the five layers protecting our planet.</em><br>Ngjitu nga sipërfaqja e Tokës deri në skajin e hapësirës dhe zbulo çfarë fshihet në secilën shtresë.</p><button class="big" onclick="document.getElementById('lab').scrollIntoView()">START EXPLORING</button></header>
+<main id="lab"><canvas id="cv"></canvas><div id="lbls"></div>
+<div id="bar" class="gl"><button onclick="resetV()">RESET VIEW</button><button id="bEx" onclick="explore()">EXPLORE MODE</button><button id="bAn" class="on" onclick="toggleAn()">ANIMATE</button><button onclick="expo()">EKSPEDITË</button><button onclick="zoom(.8)">ZOOM +</button><button onclick="zoom(1.25)">ZOOM −</button><button onclick="mv(1)">LART</button><button onclick="mv(-1)">POSHTË</button><button onclick="fs()">FULLSCREEN</button></div>
+<div id="scale" class="gl"><i></i></div><div id="hint">Tërhiq për të rrotulluar · kliko shtresat dhe objektet</div>
+<aside id="panel" class="gl" aria-live="polite"></aside>
+<div id="toast" class="gl"><h3></h3><p></p><button class="sm" onclick="exNext()">VAZHDO</button> <button class="sm" onclick="exStop()">NDALO</button></div></main>
+<section class="q"><h2>SA MIRË E NJEH ATMOSFERËN?</h2><div id="qb" class="gl"></div></section>
+<section class="end"><div class="earth"></div><h2>ATMOSFERA – MBROJTËSJA E JETËS NË TOKË</h2><p>Atmosfera na jep ajrin për të marrë frymë dhe presionin që mban ujin të lëngët. Ozoni filtron rrezet UV, meteorët digjen para se të na arrijnë, dhe fusha magnetike me jonosferën shmangin erën diellore. Pa këto pesë shtresa Toka nuk do të ishte shtëpi e jetës.</p></section>
+<footer>Punoi: Eneo Kaziu<br>Punoi: Dean Ramolli</footer>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+const $=s=>document.querySelector(s);
+const L=[
+{n:"Troposfera",en:"Troposphere",h:"0 – 12 km (≈8 km te polet, deri ≈18 km te ekuatori)",t:"Bie me lartësinë, rreth 6.5 °C për çdo km: nga ≈ +15 °C në sipërfaqe në ≈ −56 °C në tropopauzë.",ch:"Përmban rreth 75–80% të masës së ajrit dhe pothuajse gjithë avullin e ujit. Ajri përzihet vazhdimisht nga konvekcioni.",ph:"Retë, shiu, bora, vetëtimat, era dhe stuhitë: këtu zhvillohet moti.",im:"Na jep oksigjenin për frymëmarrje dhe mban ciklin e ujit.",f:["Avionët e pasagjerëve fluturojnë zakonisht në 10–12 km, pranë majës së saj.","Një vetëtimë ngroh ajrin në rreth 30 000 °C.","Është shtresa më e hollë, por ka pjesën më të madhe të ajrit."],c:"#3aa0ff",r:[5,5.45]},
+{n:"Stratosfera",en:"Stratosphere",h:"12 – 50 km",t:"Rritet me lartësinë: nga ≈ −56 °C në ≈ 0 °C në stratopauzë, sepse ozoni thith rrezet UV.",ch:"Ajër i thatë dhe i qetë, pa turbulenca vertikale. Përmban shtresën e ozonit (rreth 15–35 km).",ph:"Thithja e UV nga ozoni, retë polare stratosferike, balona meteorologjike dhe avionë shumë të lartë.",im:"Ozoni na mbron nga rrezatimi ultravjollcë që dëmton ADN-në dhe lëkurën.",f:["Balonat meteorologjike shpërthejnë këtu, kur zgjerohen shumë.","Vrima e ozonit mbi Antarktidë u krijua nga gazet CFC dhe po rikuperohet falë Protokollit të Montrealit.","Rreth 99% e masës së ajrit mbetet poshtë 30 km."],c:"#8a6bff",r:[5.45,5.95]},
+{n:"Mezosfera",en:"Mesosphere",h:"50 – 85 km",t:"Bie përsëri deri në ≈ −90 °C në mesopauzë, vendi më i ftohtë i atmosferës.",ch:"Ajri është i rrallë, por mjaftueshëm i dendur për të ngadalësuar trupat që hyjnë nga hapësira.",ph:"Meteorët digjen, shfaqen retë noktilucente dhe shkarkesat elektrike “sprite”.",im:"Vepron si mburojë: shumica e meteoroideve shpërbëhen këtu para se të arrijnë sipërfaqen.",f:["Është shtresa më e vështirë për t’u studiuar: shumë lart për balona dhe shumë poshtë për satelitë.","Shumica e “yjeve që bien” janë grimca sa një kokërr rëre.","Retë noktilucente shihen vetëm në muzgje verore në gjerësi të larta."],c:"#ff7ad9",r:[5.95,6.55]},
+{n:"Termosfera",en:"Thermosphere",h:"85 – 500/600 km",t:"Rritet fuqishëm, nga qindra °C deri mbi 1500 °C, sipas aktivitetit të Diellit.",ch:"Ajër jashtëzakonisht i rrallë. Atomet thithin rrezatim X dhe UV dhe jonizohen (jonosfera).",ph:"Aurora Borealis dhe Australis, jonosfera që reflekton valët radio, orbita e ISS dhe e satelitëve të ulët.",im:"Jonosfera mundëson komunikimet radio në distanca të gjata; aurorat tregojnë mbrojtjen e fushës magnetike.",f:["Është “e nxehtë”, por nuk do ta ndjeje: ka shumë pak grimca për të transferuar nxehtësi.","ISS rrotullon Tokën për rreth 90 minuta, në rreth 400 km.","Aurorat shfaqen zakonisht në 100–300 km lartësi."],c:"#35e0ff",r:[6.55,8.3]},
+{n:"Egzosfera",en:"Exosphere",h:"mbi 500/600 km, deri rreth 10 000 km",t:"Teorikisht mbi 1000 °C, por grimcat janë aq të rralla sa temperatura ka pak kuptim praktik.",ch:"Skaji i jashtëm i atmosferës. Atomet e hidrogjenit dhe heliumit mund t’i shpëtojnë tërheqjes së Tokës.",ph:"Orbitat e shumë satelitëve dhe ikja e gazeve të lehta në hapësirë.",im:"Është zona kalimtare midis atmosferës dhe hapësirës ndërplanetare.",f:["Kufiri s’është i mprehtë: ajri hollohet gradualisht në hapësirë.","Satelitët gjeostacionarë janë në 35 786 km, përtej shkallës së këtij modeli.","Hidrogjeni formon rreth Tokës një re të hollë, gjeokoronën."],c:"#ff9a3c",r:[8.3,10]}];
+const O={cloud:["Retë","Pika uji ose kristale akulli që formohen kur avulli i ujit ftohet dhe kondensohet rreth grimcave. Lëvizin me erën.","Troposfera"],plane:["Aeroplan pasagjerësh","Fluturon zakonisht në 10–12 km, mbi pjesën më të madhe të motit, ku ajri i hollë ul rezistencën.","Troposfera dhe tropopauza"],bird:["Zogjtë","Shumica fluturojnë poshtë disa qindra metrave; disa lloje arrijnë mbi 6 km. Mbeten në troposferë.","Troposfera"],light:["Vetëtima","Shkarkesë elektrike në retë e stuhisë. Ngroh ajrin në rreth 30 000 °C; zgjerimi i shpejtë krijon bubullimën.","Troposfera"],balloon:["Balonë meteorologjike","Mban radiosonda që masin temperaturën, lagështinë dhe presionin. Ngrihet deri rreth 30 km, ku zgjerohet dhe shpërthen.","Stratosfera"],ozone:["Shtresa e ozonit","Brez i pasur me ozon (O₃), rreth 15–35 km, që thith pjesën më të madhe të UV të dëmshëm të Diellit.","Stratosfera"],meteor:["Meteor","Copëz shkëmbi ose metali nga hapësira që hyn me dhjetëra km/s. Ngjeshja dhe fërkimi me ajrin e nxehin e e djegin në mezosferë, duke lënë gjurmë drite.","Mezosfera"],aurora:["Aurora Borealis / Australis","Grimca të ngarkuara të erës diellore, të drejtuara nga fusha magnetike drejt poleve, përplasen me oksigjenin dhe azotin dhe i bëjnë të shkëlqejnë: jeshil, kuq, vjollcë.","Termosfera"],iss:["Stacioni Ndërkombëtar Hapësinor (ISS)","Laborator në orbitë, rreth 400 km lart, me shpejtësi ≈ 28 000 km/h. Rrotullon Tokën për rreth 90 minuta.","Termosfera"],sat:["Satelit në orbitë të ulët","Përdoren për vëzhgimin e Tokës, navigim dhe komunikim; ndodhen kryesisht në termosferë.","Termosfera"],sat2:["Satelit në orbitë të lartë","Orbitat e larta shërbejnë për komunikim, televizion dhe parashikim moti.","Egzosfera"],ship:["Anije hapësinore","Mjet që del përtej atmosferës. Kalon shtresat me shpejtësi të madhe për të arritur orbitën.","Egzosfera"]};
+const EX=[["Nisemi nga sipërfaqja","Këtu jetojmë, në fund të troposferës. Presioni i ajrit është më i madhi.",5,4.5,1.45],["Kalojmë nëpër re","Retë formohen nga avulli i ujit që kondensohet; ato mbeten në troposferë.",5.2,4,1.4],["Avionët","Avionët fluturojnë në 10–12 km, te tropopauza, ku moti pothuajse mbaron.",5.4,4,1.4],["Shtresa e ozonit","Në stratosferë ozoni thith pjesën më të madhe të rrezeve UV.",5.72,4.5,1.4],["Meteorët që digjen","Në mezosferë fërkimi me ajrin i shndërron meteorët në gjurmë drite.",6.3,5,1.4],["Aurorat polare","Në termosferë erërat diellore shkaktojnë aurorat në rreth 100–300 km.",6.7,9,.85],["Satelitët","ISS dhe satelitët e ulët orbitojnë në termosferë; të tjerët më lart.",7.4,9,1.3],["Hapësira","Egzosfera hollohet gradualisht në hapësirë. Toka duket e brishtë nga larg.",0,36,1.35]];
+const KM=[[0,"0 km","Sipërfaqja",5,4],[20,"12 km","Tropopauza",5.45,18],[36,"50 km","Stratopauza",5.95,36],[52,"85 km","Mesopauza",6.55,52],[72,"≈600 km","Termopauza",8.3,72],[93,"10 000 km","Egzosfera",10,93]];
+const stage=$("#lab"),cv=$("#cv");let anim=true,sel=-1,exI=-1,exT=0,eT=0,eI=0,vis=true;
+const R=new THREE.WebGLRenderer({canvas:cv,antialias:true,alpha:true});R.setPixelRatio(Math.min(devicePixelRatio,2));
+const S=new THREE.Scene(),C=new THREE.PerspectiveCamera(45,1,.1,600);
+const cam={t:new THREE.Vector3(),d:26,th:0,ph:1.35},g={t:new THREE.Vector3(),d:26,th:0,ph:1.35};
+function size(){const w=stage.clientWidth,h=stage.clientHeight;R.setSize(w,h,false);C.aspect=w/h;C.updateProjectionMatrix()}
+function home(){g.t.set(0,0,0);g.d=C.aspect<1?36:26;g.th=0;g.ph=1.35}
+addEventListener("resize",()=>{size()});size();home();cam.d=g.d;
+S.add(new THREE.AmbientLight(0x6688bb,.8));const sun=new THREE.DirectionalLight(0xffffff,1.3);sun.position.set(10,6,12);S.add(sun);
+const world=new THREE.Group();S.add(world);
+const tc=document.createElement("canvas");tc.width=512;tc.height=256;const x=tc.getContext("2d");x.fillStyle="#0b3d7a";x.fillRect(0,0,512,256);
+for(let i=0;i<70;i++){x.fillStyle=Math.random()<.2?"#7a6a4a":"#2f7d4f";x.beginPath();x.ellipse(Math.random()*512,30+Math.random()*196,8+Math.random()*34,5+Math.random()*16,Math.random()*3,0,7);x.fill()}
+x.fillStyle="#eef6ff";x.fillRect(0,0,512,14);x.fillRect(0,242,512,14);
+const earth=new THREE.Mesh(new THREE.SphereGeometry(5,64,48),new THREE.MeshPhongMaterial({map:new THREE.CanvasTexture(tc),shininess:8}));world.add(earth);
+const shells=L.map((d,i)=>{const m=new THREE.Mesh(new THREE.SphereGeometry(d.r[1],48,32),new THREE.MeshBasicMaterial({color:d.c,transparent:true,opacity:.13,depthWrite:false,blending:THREE.AdditiveBlending}));world.add(m);
+const p=[];for(let k=0;k<=96;k++){const a=k/96*6.2832;p.push(new THREE.Vector3(Math.cos(a)*d.r[1],Math.sin(a)*d.r[1],0))}
+world.add(new THREE.LineLoop(new THREE.BufferGeometry().setFromPoints(p),new THREE.LineBasicMaterial({color:0xffffff,transparent:true,opacity:.35})));return m});
+const lbls=L.map((d,i)=>{const e=document.createElement("div");e.className="lb";e.style.color=d.c;e.innerHTML=d.n+"<small>"+d.h.split(" (")[0]+"</small>";$("#lbls").appendChild(e);return e});
+const lang=[1.15,.95,.75,.5,.2];
+const click=[],piv=[];
+function hit(o,k,r){const m=new THREE.Mesh(new THREE.SphereGeometry(r,8,8),new THREE.MeshBasicMaterial({transparent:true,opacity:0,depthWrite:false}));m.userData.k=k;o.add(m);click.push(m)}
+function orb(ch,rad,sp,tx,tz,ph){const p=new THREE.Group();p.rotation.x=tx;p.rotation.z=tz;const q=new THREE.Group();q.rotation.y=ph;ch.position.x=rad;q.add(ch);p.add(q);world.add(p);piv.push([q,sp]);return q}
+const bm=(c,o)=>new THREE.MeshBasicMaterial({color:c,transparent:o!=null,opacity:o==null?1:o});
+const bx=(a,b,c,col)=>new THREE.Mesh(new THREE.BoxGeometry(a,b,c),bm(col));
+for(let i=0;i<18;i++){const c=new THREE.Group();for(let k=0;k<3;k++){const s=new THREE.Mesh(new THREE.SphereGeometry(.1+Math.random()*.1,8,8),bm(0xffffff,.85));s.position.set((k-1)*.17,Math.random()*.05,Math.random()*.1);c.add(s)}hit(c,"cloud",.35);orb(c,5.12+Math.random()*.1,.015+Math.random()*.03,Math.random()*3,Math.random()*3,Math.random()*6.28)}
+function plane(){const p=new THREE.Group(),b=new THREE.Mesh(new THREE.CylinderGeometry(.03,.03,.3,8),bm(0xffffff));b.rotation.x=1.5708;p.add(b,bx(.02,.34,.07,0xdddddd));hit(p,"plane",.25);return p}
+orb(plane(),5.4,.1,.5,.2,0);orb(plane(),5.75,.07,-.5,.3,2);
+const bird=new THREE.Group();for(let k=0;k<3;k++){const s=new THREE.Mesh(new THREE.SphereGeometry(.03,6,6),bm(0x111111));s.position.set(0,(k-1)*.1,Math.abs(k-1)*.06);bird.add(s)}hit(bird,"bird",.25);orb(bird,5.1,.05,1,0,1);
+const balloon=new THREE.Mesh(new THREE.SphereGeometry(.09,12,12),bm(0xffd34a));hit(balloon,"balloon",.3);const bq=orb(balloon,5.5,0,.3,-.1,.4);
+const lg=new THREE.Group(),lp=[[0,0,0],[.08,.15,0],[-.05,.25,0],[.06,.38,0],[0,.5,0]].map(a=>new THREE.Vector3(...a));const lm=new THREE.LineBasicMaterial({color:0xffee66,transparent:true,opacity:0});lg.add(new THREE.Line(new THREE.BufferGeometry().setFromPoints(lp),lm));
+const ld=new THREE.Vector3(-.5,.55,.67).normalize();lg.position.copy(ld).multiplyScalar(5.02);lg.quaternion.setFromUnitVectors(new THREE.Vector3(0,1,0),ld);hit(lg,"light",.35);world.add(lg);
+const uvN=40,uvA=new Float32Array(uvN*3),uvD=[],uvR=[],uvS=[];for(let i=0;i<uvN;i++){uvD.push(new THREE.Vector3(.4+Math.random()*.6,(Math.random()-.5)*.9,Math.random()*.8).normalize());uvR.push(5.7+Math.random()*2.3);uvS.push(Math.random()<.5?5.72:5.05)}
+const uvG=new THREE.BufferGeometry();uvG.setAttribute("position",new THREE.BufferAttribute(uvA,3));world.add(new THREE.Points(uvG,new THREE.PointsMaterial({color:0xb48cff,size:.09,blending:THREE.AdditiveBlending,depthWrite:false})));
+function cloud(n,r0,r1,col,sz){const a=new Float32Array(n*3);for(let i=0;i<n;i++){const v=new THREE.Vector3().randomDirection?0:0;const d=new THREE.Vector3(Math.random()-.5,Math.random()-.5,Math.random()-.5).normalize().multiplyScalar(r0+Math.random()*(r1-r0));a.set([d.x,d.y,d.z],i*3)}const gg=new THREE.BufferGeometry();gg.setAttribute("position",new THREE.BufferAttribute(a,3));const p=new THREE.Points(gg,new THREE.PointsMaterial({color:col,size:sz,transparent:true,opacity:.8,depthWrite:false,blending:THREE.AdditiveBlending}));world.add(p);return p}
+const dust=cloud(120,6,6.5,0xffffff,.03),ion=cloud(200,6.7,8.2,0x35e0ff,.05);
+const mets=[];for(let i=0;i<4;i++){const h=new THREE.Mesh(new THREE.SphereGeometry(.05,8,8),bm(0xffcc88));const tr=new THREE.Line(new THREE.BufferGeometry().setFromPoints([new THREE.Vector3(),new THREE.Vector3()]),new THREE.LineBasicMaterial({color:0xff9a3c,transparent:true,opacity:.8}));hit(h,"meteor",.28);world.add(h,tr);mets.push({h,tr,u:Math.random(),a:new THREE.Vector3(),b:new THREE.Vector3(),sp:.4+Math.random()*.3,n:1});spawn(mets[i])}
+function spawn(m){const d=new THREE.Vector3(Math.random()*1.4-.7,Math.random()*1.2+.1,1).normalize(),t=new THREE.Vector3(-d.y,d.x,0).normalize().multiplyScalar(.9);m.a.copy(d).multiplyScalar(6.5).add(t);m.b.copy(d).multiplyScalar(5.98).sub(t);m.u=0}
+const aur=[];[1,-1].forEach(s=>[[2.4,.3,0x44ffaa,.35],[2.0,.18,0xc06bff,.3]].forEach(a=>{const m=new THREE.Mesh(new THREE.TorusGeometry(a[0],a[1],10,64),new THREE.MeshBasicMaterial({color:a[2],transparent:true,opacity:a[3],depthWrite:false,blending:THREE.AdditiveBlending}));m.rotation.x=1.5708;m.position.y=s*6.58;m.userData.k="aurora";click.push(m);world.add(m);aur.push(m)}));
+const iss=new THREE.Group();iss.add(bx(.26,.05,.05,0xffffff),bx(.02,.05,.36,0x4a8cff),bx(.02,.05,.36,0x4a8cff));iss.children[1].position.x=.1;iss.children[2].position.x=-.1;hit(iss,"iss",.3);orb(iss,6.95,.22,.9,0,0);
+function sat(k,r,sp,tx,tz,ph){const s=new THREE.Group();s.add(bx(.1,.1,.1,0xbbbbbb),bx(.28,.01,.08,0x4a8cff));hit(s,k,.25);orb(s,r,sp,tx,tz,ph)}
+sat("sat",7.5,.17,1.3,0,1);sat("sat",7.9,.14,-.6,0,3);sat("sat2",8.8,.07,.4,.5,2);sat("sat2",9.5,.05,-1,.2,4);
+const ship=new THREE.Group(),co=new THREE.Mesh(new THREE.ConeGeometry(.08,.3,10),bm(0xffffff));co.rotation.z=-1.5708;ship.add(co,new THREE.Mesh(new THREE.CylinderGeometry(.08,.08,.25,10),bm(0xcccccc)));ship.children[1].rotation.z=1.5708;ship.children[1].position.x=-.25;hit(ship,"ship",.3);orb(ship,9.15,.08,.3,.1,5);
+const sa=new Float32Array(2000*3);for(let i=0;i<2000;i++){const d=new THREE.Vector3(Math.random()-.5,Math.random()-.5,Math.random()-.5).normalize().multiplyScalar(100+Math.random()*60);sa.set([d.x,d.y,d.z],i*3)}
+const sg=new THREE.BufferGeometry();sg.setAttribute("position",new THREE.BufferAttribute(sa,3));S.add(new THREE.Points(sg,new THREE.PointsMaterial({color:0xffffff,size:.45})));
+/* UI */
+const panel=$("#panel");
+function showL(i){sel=i;const d=L[i];panel.innerHTML=`<button class=x onclick="closeP()" aria-label="Mbyll">×</button><h2 style="color:${d.c}">${d.n}</h2><p class=en>${d.en} · ${d.h}</p><h4>Temperatura</h4><p>${d.t}</p><h4>Karakteristikat</h4><p>${d.ch}</p><h4>Dukuritë natyrore</h4><p>${d.ph}</p><h4>Rëndësia për jetën</h4><p>${d.im}</p><h4>Did You Know?</h4><ul>${d.f.map(f=>"<li>"+f+"</li>").join("")}</ul>`;panel.classList.add("open");shells.forEach((m,k)=>m.material.opacity=k==i?.4:.07)}
+function showO(k){const o=O[k];panel.innerHTML=`<button class=x onclick="closeP()" aria-label="Mbyll">×</button><h2 style="color:var(--or)">${o[0]}</h2><p class=en>Shtresa: ${o[2]}</p><p>${o[1]}</p>`;panel.classList.add("open")}
+function closeP(){sel=-1;panel.classList.remove("open");shells.forEach(m=>m.material.opacity=.13)}
+function focusR(r,d,ph){g.t.set(0,r,0);g.d=d;g.ph=ph||1.45;g.th=0}
+function focusL(i){const d=L[i];focusR((d.r[0]+d.r[1])/2,4.5+(d.r[1]-d.r[0])*1.4)}
+function resetV(){exStop();stopEx();home();closeP()}
+function zoom(f){g.d=Math.max(3,Math.min(60,g.d*f))}
+function mv(s){g.t.y+=s*1.2}
+function toggleAn(){anim=!anim;$("#bAn").classList.toggle("on",anim)}
+function fs(){try{document.fullscreenElement?document.exitFullscreen():stage.requestFullscreen()}catch(e){}}
+function stopEx(){if(eT){clearInterval(eT);eT=0;$("#bEx").classList.remove("on")}}
+function explore(){if(eT){stopEx();return}exStop();$("#bEx").classList.add("on");const step=()=>{showL(eI);focusL(eI);eI=(eI+1)%5};step();eT=setInterval(step,6000)}
+function expo(){stopEx();exI=-1;exNext()}
+function exNext(){clearTimeout(exT);exI++;if(exI>=EX.length){exStop();resetV();return}const e=EX[exI];closeP();$("#toast").style.display="block";$("#toast h3").textContent=e[0];$("#toast p").textContent=e[1];focusR(e[2],e[3],e[4]);exT=setTimeout(exNext,6000)}
+function exStop(){clearTimeout(exT);exI=-1;$("#toast").style.display="none"}
+KM.forEach(k=>{const b=document.createElement("button");b.style.bottom=k[0]+"%";b.innerHTML=k[1]+"<span>"+k[2]+"</span>";b.onclick=()=>{exStop();stopEx();focusR(k[3],5.5)};$("#scale").appendChild(b)});
+/* input */
+const rc=new THREE.Raycaster(),pt=new THREE.Vector2();let dr=null,mvd=0;
+cv.addEventListener("pointerdown",e=>{dr={x:e.clientX,y:e.clientY};mvd=0;cv.setPointerCapture(e.pointerId);cv.style.cursor="grabbing"});
+cv.addEventListener("pointermove",e=>{if(!dr)return;const dx=e.clientX-dr.x,dy=e.clientY-dr.y;mvd+=Math.abs(dx)+Math.abs(dy);dr={x:e.clientX,y:e.clientY};g.th-=dx*.006;g.ph=Math.max(.25,Math.min(2.9,g.ph-dy*.006))});
+cv.addEventListener("pointerup",e=>{cv.style.cursor="grab";if(dr&&mvd<6)pick(e);dr=null});
+cv.addEventListener("wheel",e=>{e.preventDefault();zoom(e.deltaY>0?1.1:.9)},{passive:false});
+function pick(e){exStop();stopEx();const r=cv.getBoundingClientRect();pt.set((e.clientX-r.left)/r.width*2-1,-(e.clientY-r.top)/r.height*2+1);rc.setFromCamera(pt,C);
+const h=rc.intersectObjects(click,false)[0];if(h){showO(h.object.userData.k);return}
+const o=rc.ray.origin,d=rc.ray.direction,dist=o.clone().cross(d).length();
+if(dist>5.6&&dist<5.85){showO("ozone");return}
+for(let i=0;i<5;i++)if(dist>=L[i].r[0]&&dist<L[i].r[1]){showL(i);focusL(i);return}closeP()}
+/* loop */
+const clock=new THREE.Clock(),V=new THREE.Vector3();
+new IntersectionObserver(a=>vis=a[0].isIntersecting).observe(stage);
+function loop(){requestAnimationFrame(loop);if(!vis)return;const dt=Math.min(clock.getDelta(),.05),t=clock.elapsedTime;
+if(anim){earth.rotation.y+=dt*.03;piv.forEach(p=>p[0].rotation.y+=p[1]*dt);
+balloon.position.x=5.5+.5*((t*.04)%1);dust.rotation.y+=dt*.02;ion.rotation.y-=dt*.03;
+lm.opacity=Math.random()<.015?1:lm.opacity*.88;
+for(let i=0;i<uvN;i++){uvR[i]-=dt*.8;if(uvR[i]<uvS[i]){uvR[i]=8;uvS[i]=Math.random()<.5?5.72:5.05}uvA.set([uvD[i].x*uvR[i],uvD[i].y*uvR[i],uvD[i].z*uvR[i]],i*3)}uvG.attributes.position.needsUpdate=true;
+mets.forEach(m=>{m.u+=dt*m.sp;if(m.u>1)spawn(m);m.h.position.lerpVectors(m.a,m.b,m.u);m.h.scale.setScalar(1-m.u*.7);const tl=m.a.clone().sub(m.b).normalize().multiplyScalar(.5*(1-m.u*.5));m.tr.geometry.setFromPoints([m.h.position,m.h.position.clone().add(tl)])});
+aur.forEach((m,i)=>{m.material.opacity=.22+.15*Math.sin(t*1.5+i);m.scale.setScalar(1+.04*Math.sin(t*.9+i))})}
+cam.t.lerp(g.t,.06);cam.d+=(g.d-cam.d)*.06;cam.th+=(g.th-cam.th)*.1;cam.ph+=(g.ph-cam.ph)*.1;
+C.position.set(cam.t.x+cam.d*Math.sin(cam.ph)*Math.sin(cam.th),cam.t.y+cam.d*Math.cos(cam.ph),cam.t.z+cam.d*Math.sin(cam.ph)*Math.cos(cam.th));C.lookAt(cam.t);
+const w=stage.clientWidth,h=stage.clientHeight;
+lbls.forEach((e,i)=>{const r=(L[i].r[0]+L[i].r[1])/2,a=lang[i];V.set(Math.sin(a)*r,Math.cos(a)*r,0).project(C);e.style.display=V.z>1?"none":"block";e.style.transform=`translate(${(V.x*.5+.5)*w+6}px,${(-V.y*.5+.5)*h-14}px)`});
+R.render(S,C)}
+loop();
+/* quiz */
+const BK=[["Sa shtresa kryesore ka atmosfera e Tokës?","5","3","4","7","Janë pesë: troposfera, stratosfera, mezosfera, termosfera dhe egzosfera."],
+["Në cilën shtresë zhvillohet moti (shiu, vetëtimat)?","Troposfera","Stratosfera","Mezosfera","Termosfera","Troposfera përmban pothuajse gjithë avullin e ujit dhe konvekcionin."],
+["Ku ndodhet shtresa e ozonit?","Stratosfera","Troposfera","Mezosfera","Egzosfera","Ozoni përqendrohet në stratosferë, rreth 15–35 km."],
+["Cila shtresë është më e ftohta, deri në rreth −90 °C?","Mezosfera","Troposfera","Termosfera","Stratosfera","Mesopauza është pika më e ftohtë e atmosferës."],
+["Pse digjen meteorët në mezosferë?","Nga fërkimi dhe ngjeshja me ajrin","Nga rrezet UV të ozonit","Nga fusha magnetike","Nga ngrohja e sipërfaqes","Me shpejtësi të madhe ajri para tyre ngjishet dhe i nxehet shumë."],
+["Ku shfaqen aurorat polare?","Termosfera","Troposfera","Stratosfera","Mezosfera","Grimcat e Diellit godasin gazet e termosferës dhe i bëjnë të shkëlqejnë."],
+["Në cilën shtresë orbiton ISS?","Termosfera","Stratosfera","Egzosfera","Mezosfera","ISS është në rreth 400 km, brenda termosferës."],
+["Si quhet kufiri midis troposferës dhe stratosferës?","Tropopauza","Stratopauza","Mesopauza","Termopauza","Tropopauza ndan troposferën nga stratosfera."],
+["Si quhet kufiri midis mezosferës dhe termosferës?","Mesopauza","Tropopauza","Stratopauza","Termopauza","Mesopauza është në rreth 85 km."],
+["Si ndryshon temperatura me lartësinë në troposferë?","Bie","Rritet","Mbetet e njëjtë","Luhatet rastësisht","Bie rreth 6.5 °C për çdo kilometër."],
+["Pse rritet temperatura në stratosferë me lartësinë?","Ozoni thith rrezet UV","Është më afër Tokës","Ka më shumë re","Ka më shumë avull uji","Thithja e UV nga ozoni e ngroh shtresën."],
+["Cila shtresë ka rreth 75–80% të masës së ajrit?","Troposfera","Stratosfera","Mezosfera","Termosfera","Troposfera është më e dendura, megjithëse më e hollë."],
+["Cila shtresë kalon gradualisht në hapësirë?","Egzosfera","Troposfera","Stratosfera","Mezosfera","Egzosfera hollohet pa kufi të mprehtë."],
+["Cilat gaze mbizotërojnë në pjesën e sipërme të egzosferës?","Hidrogjeni dhe heliumi","Oksigjeni dhe azoti","Dioksidi i karbonit","Avulli i ujit","Gazet e lehta mund t’i shpëtojnë tërheqjes së Tokës."],
+["Rreth çfarë lartësie fluturojnë avionët e pasagjerëve?","10–12 km","1–2 km","50 km","200 km","Fluturojnë pranë majës së troposferës për të shmangur motin."],
+["Çfarë thith pjesën më të madhe të UV të dëmshëm?","Ozoni","Dioksidi i karbonit","Azoti","Heliumi","Ozoni (O₃) vepron si filtër i UV."],
+["Sa është përafërsisht lartësia e stratosferës?","12–50 km","0–12 km","50–85 km","85–600 km","Stratosfera shtrihet nga tropopauza te stratopauza."],
+["Pse termosfera nuk të djeg edhe pse temperatura është mbi 1000 °C?","Ajri është shumë i rrallë","Është shumë e lagësht","Ka ozon","Ka shumë erë","Me pak grimca, transferimi i nxehtësisë është i papërfillshëm."],
+["Mezosfera shtrihet përafërsisht midis:","50 dhe 85 km","0 dhe 12 km","85 dhe 600 km","12 dhe 50 km","Kufijtë e saj janë stratopauza dhe mesopauza."],
+["Çfarë shkakton aurorat?","Grimca të ngarkuara të erës diellore","Retë e stuhive","Ozoni","Meteorët","Fusha magnetike i drejton grimcat drejt poleve."],
+["Ku ndodhen kryesisht satelitët në orbitë të ulët (LEO)?","Termosfera","Troposfera","Stratosfera","Mezosfera","LEO është zakonisht 300–1000 km, në termosferë."],
+["Çfarë është jonosfera?","Zonë ku atomet jonizohen nga rrezatimi diellor","Shtresa e ozonit","Një lloj reje","Kufiri i stratosferës","Ajo mbivendoset kryesisht me termosferën."]];
+const qb=$("#qb");let Q=[],qi=0,sc=0;
+const sh=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a};
+function startQ(){Q=sh(BK).slice(0,15);qi=0;sc=0;showQ()}
+function showQ(){const q=Q[qi],o=sh(q.slice(1,5));qb.innerHTML=`<div class=pg><b style="width:${qi/15*100}%"></b></div><p>Pyetja ${qi+1} nga 15 · Pikë: ${sc}</p><h3>${q[0]}</h3>`+o.map((t,i)=>`<button class=op data-t="${t.replace(/"/g,"&quot;")}">${"ABCD"[i]}. ${t}</button>`).join("")+`<div id=ex2></div>`;
+qb.querySelectorAll(".op").forEach(b=>b.onclick=()=>{const ok=b.dataset.t==q[1];if(ok)sc++;qb.querySelectorAll(".op").forEach(x=>{x.disabled=true;if(x.dataset.t==q[1])x.classList.add("ok")});if(!ok)b.classList.add("no");
+$("#ex2").innerHTML=`<p><b>${ok?"Saktë!":"Gabim."}</b> ${q[5]}</p><button class=sm onclick="nextQ()">${qi==14?"SHIKO REZULTATIN":"PYETJA TJETËR"}</button>`})}
+function nextQ(){qi++;qi<15?showQ():endQ()}
+function endQ(){const p=Math.round(sc/15*100),v=p>=90?"Astronaut ekspert":p>=70?"Shkencëtar i atmosferës":p>=50?"Eksplorues i zellshëm":"Fillestar: provo përsëri";qb.innerHTML=`<div class=pg><b style="width:100%"></b></div><h3>${sc} / 15 · ${p}%</h3><p>Vlerësimi: <b>${v}</b></p><button class=sm onclick="startQ()">RETAKE QUIZ</button>`}
+startQ();
+</script></body></html>
